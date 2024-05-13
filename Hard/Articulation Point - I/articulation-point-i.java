@@ -39,53 +39,56 @@ class GFG
 class Solution
 {
     //Function to return Breadth First Traversal of given graph.
-    private int timer = 1;
-    private void dfs(int node, int parent, int[] vis,
-                     int tin[], int low[], int[] mark,
-                     ArrayList<ArrayList<Integer>> adj) {
-        vis[node] = 1;
-        tin[node] = low[node] = timer;
-        timer++;
-        int child = 0;
-        for (Integer it : adj.get(node)) {
-            if (it == parent) continue;
-            if (vis[it] == 0) {
-                dfs(it, node, vis, tin, low, mark, adj);
-                low[node] = Math.min(low[node], low[it]);
-                // node --- it
-                if (low[it] >= tin[node] && parent != -1) {
-                    mark[node] = 1;
-                }
-                child++;
-            } else {
-                low[node] = Math.min(low[node], tin[it]);
+    private int c;
+    private boolean vis[];
+    private int low[];
+    private int time[];
+    private List<List<Integer>>ans;
+    private HashSet<Integer>set;
+    private void dfs(int i, int par, ArrayList<ArrayList<Integer>> adj){
+        vis[i]=true;
+        low[i]=c;
+        time[i]=c;
+        int child=0;
+        c++;
+        for(int node : adj.get(i)){
+            if(node==par)continue;
+            
+            if(vis[node])low[i]=Math.min(time[node], low[i]);
+            else{
+                
+                dfs(node, i, adj);
+                low[i]=Math.min(low[i], low[node]);
+                // System.out.println("node: "+node+" i: "+i+" par: "+par);
+                if(low[node]>=time[i] && par!=-1){
+                    // System.out.println("in---"+"node: "+node+" i: "+i+" par: "+par);
+                    // System.out.print(node);
+                   set.add(i); 
+                   
+                }child++;
             }
+            
         }
-        if (child > 1 && parent == -1) {
-            mark[node] = 1;
-        }
+        if(child>1 && par==-1)set.add(i);
+       
     }
-    //Function to return Breadth First Traversal of given graph.
-    public ArrayList<Integer> articulationPoints(int n,
-            ArrayList<ArrayList<Integer>> adj) {
-        int[] vis = new int[n];
-        int[] tin = new int[n];
-        int[] low = new int[n];
-        int[] mark = new int[n];
-        for (int i = 0; i < n; i++) {
-            if (vis[i] == 0) {
-                dfs(i, -1, vis, tin, low, mark, adj);
-            }
+    public ArrayList<Integer> articulationPoints(int n,ArrayList<ArrayList<Integer>> adj)
+    {
+        // Code here
+        vis=new boolean[n];
+        low=new int[n];
+        time=new int[n];
+        set=new HashSet<>();
+        c=1;
+        for(int i=0;i<n;i++){
+        if(vis[i]==false)
+        dfs(i, -1, adj);
         }
-        ArrayList<Integer> ans = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            if (mark[i] == 1) {
-                ans.add(i);
-            }
-        }
-        if (ans.size() == 0) {
-            ans.add(-1);
-        }
-        return ans;
+        // if(adj.get(0).size()>1)set.add(0);
+        
+        ArrayList<Integer>a=new ArrayList<>(set);
+        // return a;
+        Collections.sort(a);
+        return a.size()==0?new ArrayList<>(Arrays.asList(-1)):a;
     }
 }

@@ -1,8 +1,3 @@
-// class Solution {
-//     public int largestIsland(int[][] grid) {
-        
-//     }
-// }
 public class DisjointSetUnion {
     int djs[];
     int rank[];
@@ -80,7 +75,7 @@ class Solution{
                     }
                 }//only left up right
                 else if(i-1>=0 && j-1>=0 && j+1<n){
-                    System.out.println(i+" "+j);
+                    // System.out.println(i+" "+j);
                     int up=ds.supParent((i-1)*n+j);
                     int left=ds.supParent((i)*n+j-1),right=ds.supParent((i)*n+j+1);
                     if(grid[i-1][j]==1){

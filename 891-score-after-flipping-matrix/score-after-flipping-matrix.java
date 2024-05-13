@@ -6,13 +6,7 @@ class Solution {
         // int rowMax=(int)Math.pow(2, m)-1;
         // int colMax=(int)Math.pow(2, n)-1;
         for(int i=0;i<m;i++){
-            int not=0,tot=0;
-            for(int j=n-1;j>=0;j--){
-                if(grid[i][j]==1)
-                not+=(int)Math.pow(2, (n-1)-j);
-                else tot+=(int)Math.pow(2, n-1-j);
-            }
-            if(not<tot){
+            if((grid[i][0]==0)){
                 for(int j=0;j<n;j++)grid[i][j]^=1;
             }
         }

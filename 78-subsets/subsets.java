@@ -5,9 +5,9 @@ class Solution {
             ans.add(list);
             return;
         }
-        list.add(a[i]);
+        
         f(i+1, a, new ArrayList<>(list));
-        list.remove(list.size()-1);
+        list.add(a[i]);
         f(i+1, a, new ArrayList<>(list));
     }
     public List<List<Integer>> subsets(int[] nums) {

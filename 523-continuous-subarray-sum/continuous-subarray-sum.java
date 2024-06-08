@@ -11,7 +11,7 @@ class Solution {
             if(!map.containsKey(sum%k))
             map.put(sum%k, i);
         }
-        System.out.println(map);
+        // System.out.println(map);
         return false;
     }
 }

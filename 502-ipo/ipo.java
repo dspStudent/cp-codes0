@@ -15,7 +15,7 @@ class Solution {
         PriorityQueue<Projects>q=new PriorityQueue<>((i, j)->j.prof-i.prof);
         int ind=0;
         while(k-->0){
-            System.out.println(w);
+            // System.out.println(w);
             while(ind<n && w>=p[ind].cap){
                 q.add(p[ind++]);
                 // System.out.println(w);
@@ -25,7 +25,7 @@ class Solution {
 
             
             w+=q.poll().prof;
-            System.out.println(w);
+            // System.out.println(w);
         }
         return w;
     }

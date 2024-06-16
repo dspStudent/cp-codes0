@@ -1,19 +1,16 @@
 class Solution {
     public int minPatches(int[] nums, int n) {
-        long miss = 1;
-        int result = 0;
-        int i = 0;
-
-        while (miss <= n) {
-            if (i < nums.length && nums[i] <= miss) {
-                miss += nums[i];
+        long maxNum=0, i=0, count=0;
+        while(maxNum<n){
+            if(i<nums.length && maxNum+1>=nums[(int)i]){
+                maxNum+=nums[(int)i];
                 i++;
-            } else {
-                miss += miss;
-                result++;
+            }
+            else {
+                count++;
+                maxNum+=(maxNum+1);
             }
         }
-
-        return result;
+        return (int)count;
     }
 }

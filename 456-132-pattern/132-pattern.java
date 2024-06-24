@@ -6,7 +6,7 @@ class Solution {
         for(int i=n-1;i>=0;i--){
             if(a[i]<kel)return true;
             while(!st.isEmpty() && st.peek()<a[i]){
-                kel=st.pop();
+                kel=Math.max(kel, st.pop());
             }
             st.push(a[i]);
         }
